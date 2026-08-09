@@ -79,42 +79,12 @@
           "buildVersion": "1"
         },
         {
-          "version": "2.4.99",
-          "date": "2026-05-13T19:26:27Z",
-          "versionDate": "2026-05-13T19:26:27Z",
-          "localizedDescription": "Add support for iOS 16.7.16, 17.0 - 18.7.1 (arm64)",
-          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b3/Dopamine.ipa",
-          "size": 53783818,
-          "minOSVersion": "15.0",
-          "buildVersion": "1"
-        },
-        {
           "version": "2.4.9",
           "date": "2026-04-25T16:20:49Z",
           "versionDate": "2026-04-25T16:20:49Z",
           "localizedDescription": "Fix a logic bug in forkfix [2.4.8 regression]",
           "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.4.9/Dopamine.ipa",
           "size": 53702230,
-          "minOSVersion": "15.0",
-          "buildVersion": "1"
-        },
-        {
-          "version": "2.4.9",
-          "date": "2026-03-28T17:25:08Z",
-          "versionDate": "2026-03-28T17:25:08Z",
-          "localizedDescription": "Experimental fixes / improvements to DarkSword (contributed by @TheRealClarity)",
-          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b2/Dopamine.ipa",
-          "size": 53717967,
-          "minOSVersion": "15.0",
-          "buildVersion": "1"
-        },
-        {
-          "version": "2.4.9",
-          "date": "2026-03-26T06:03:57Z",
-          "versionDate": "2026-03-26T06:03:57Z",
-          "localizedDescription": "Add DarkSword kernel exploit as an option",
-          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b1/Dopamine.ipa",
-          "size": 53717758,
           "minOSVersion": "15.0",
           "buildVersion": "1"
         },

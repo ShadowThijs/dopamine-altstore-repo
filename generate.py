@@ -149,6 +149,16 @@ def build_source(releases, args, existing, cache, tmpdir):
         reverse=True,
     )
 
+    seen = set()
+    deduped = []
+    for entry in ordered:
+        key = (entry["version"], entry.get("buildVersion", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(entry)
+    ordered = deduped
+
     latest = ordered[0]
     app = {
         "name": "Dopamine",

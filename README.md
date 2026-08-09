@@ -35,6 +35,7 @@ to `master` — the workflow runs on push too.)
 | ---- | ------- |
 | `apps.json` | The source file served via GitHub Pages |
 | `generate.py` | Generates `apps.json` from the GitHub releases API (Python 3.8+, no dependencies) |
+| `ipa-metadata.json` | Cache of real version/build-number data extracted from each IPA (so IPAs are only downloaded once) |
 | `.github/workflows/update-source.yml` | Auto-updates `apps.json` every 6 hours |
 
 ## Notes

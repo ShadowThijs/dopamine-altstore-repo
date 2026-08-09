@@ -2,8 +2,9 @@
 """Generate an AltStore/SideStore-compatible source JSON for Dopamine.
 
 Fetches the latest releases of opa334/Dopamine from the GitHub API and
-writes an apps.json source file. Existing version history is merged so it
-is preserved across runs.
+writes an apps.json source file. Version metadata (version, build version,
+minimum OS) is extracted from each release's actual .ipa and cached in
+ipa-metadata.json, so IPAs are only downloaded once per release.
 
 Works with Python 3.8+ (stdlib only, no pip dependencies).
 
@@ -19,8 +20,12 @@ Optional environment variable:
 import argparse
 import json
 import os
+import plistlib
+import shutil
 import sys
+import tempfile
 import urllib.request
+import zipfile
 
 DEFAULT_OWNER = "opa334"
 DEFAULT_REPO = "Dopamine"
@@ -72,46 +77,74 @@ def release_ipa(release):
     return None
 
 
-def version_description(release):
-    body = (release.get("body") or "").strip()
-    if not body:
-        return None
-    first = body.splitlines()[0].strip().strip("* -")
-    if len(first) > 200:
-        first = first[:200].rsplit(" ", 1)[0] + "..."
-    return first
+def download(url, dest):
+    req = urllib.request.Request(url, headers={"User-Agent": "dopamine-altstore-source"})
+    with urllib.request.urlopen(req, timeout=120) as resp, open(dest, "wb") as fh:
+        shutil.copyfileobj(resp, fh)
 
 
-def build_source(releases, args, existing):
+def extract_ipa_metadata(ipa_path):
+    """Read (short version, build version, minimum OS) from the IPA's Info.plist."""
+    with zipfile.ZipFile(ipa_path) as zf:
+        infos = [
+            n for n in zf.namelist()
+            if n.startswith("Payload/") and n.endswith(".app/Info.plist")
+        ]
+        if not infos:
+            raise ValueError("no Payload/*.app/Info.plist found in IPA")
+        with zf.open(infos[0]) as fh:
+            plist = plistlib.load(fh)
+    return (
+        str(plist.get("CFBundleShortVersionString") or ""),
+        str(plist.get("CFBundleVersion") or ""),
+        str(plist.get("MinimumOSVersion") or ""),
+    )
+
+
+def get_release_metadata(release, ipa, cache, tmpdir):
+    release_id = str(release["id"])
+    if release_id in cache:
+        return cache[release_id]
+    tmp = os.path.join(tmpdir, "dopamine-download.ipa")
+    print("  downloading {} ({:.1f} MB)...".format(
+        release["tag_name"], ipa["size"] / 1024 / 1024))
+    download(ipa["browser_download_url"], tmp)
+    try:
+        short, build, minos = extract_ipa_metadata(tmp)
+    finally:
+        os.remove(tmp)
+    meta = {"short": short, "build": build, "minos": minos}
+    cache[release_id] = meta
+    return meta
+
+
+def build_source(releases, args, existing, cache, tmpdir):
     include_prerelease = not args.stable_only
     selected = [
         r for r in releases
         if (include_prerelease or not r["prerelease"]) and release_ipa(r)
     ]
 
-    versions = {}
+    entries_by_tag = {}
     for release in selected:
         ipa = release_ipa(release)
-        if not ipa:
-            continue
-        versions[release["tag_name"]] = {
-            "version": release["tag_name"],
-            "buildVersion": str(release["id"]),
+        meta = get_release_metadata(release, ipa, cache, tmpdir)
+        entry = {
+            "version": meta["short"] or release["tag_name"],
             "date": release["published_at"],
             "versionDate": release["published_at"],
             "localizedDescription": version_description(release)
             or "New Dopamine release.",
             "downloadURL": ipa["browser_download_url"],
             "size": ipa["size"],
-            "minOSVersion": MIN_IOS,
+            "minOSVersion": meta["minos"] or MIN_IOS,
         }
-
-    old_versions = (existing.get("apps") or [{}])[0].get("versions") or []
-    for entry in old_versions:
-        versions.setdefault(entry["version"], entry)
+        if meta["build"]:
+            entry["buildVersion"] = meta["build"]
+        entries_by_tag[release["tag_name"]] = entry
 
     ordered = sorted(
-        versions.values(),
+        entries_by_tag.values(),
         key=lambda v: v["date"],
         reverse=True,
     )
@@ -142,13 +175,12 @@ def build_source(releases, args, existing):
             if identifier in seen:
                 continue
             seen.add(identifier)
-            desc = version_description(release) or "New release"
             news.append(
                 {
                     "identifier": identifier,
                     "appID": "com.opa334.Dopamine",
                     "title": "Dopamine {} released".format(release["tag_name"]),
-                    "caption": desc,
+                    "caption": version_description(release) or "New release",
                     "date": release["published_at"],
                     "tintColor": TINT_COLOR,
                     "notify": False,
@@ -174,6 +206,16 @@ def build_source(releases, args, existing):
     return source
 
 
+def version_description(release):
+    body = (release.get("body") or "").strip()
+    if not body:
+        return None
+    first = body.splitlines()[0].strip().strip("* -")
+    if len(first) > 200:
+        first = first[:200].rsplit(" ", 1)[0] + "..."
+    return first
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -184,6 +226,11 @@ def main():
     )
     parser.add_argument(
         "--out", default="apps.json", help="Output file (default: apps.json)"
+    )
+    parser.add_argument(
+        "--metadata",
+        default="ipa-metadata.json",
+        help="IPA metadata cache file (default: ipa-metadata.json)",
     )
     parser.add_argument("--owner", default=DEFAULT_OWNER)
     parser.add_argument("--repo", default=DEFAULT_REPO)
@@ -208,18 +255,30 @@ def main():
         print("ERROR: could not fetch releases from GitHub: {}".format(exc), file=sys.stderr)
         sys.exit(1)
 
+    cache = {}
+    if os.path.exists(args.metadata):
+        with open(args.metadata, encoding="utf-8") as fh:
+            cache = json.load(fh)
+
     existing = {}
     if os.path.exists(args.out):
         with open(args.out, encoding="utf-8") as fh:
             existing = json.load(fh)
 
-    source = build_source(releases, args, existing)
+    with tempfile.TemporaryDirectory(prefix="dopamine-source-") as tmpdir:
+        source = build_source(releases, args, existing, cache, tmpdir)
 
-    tmp = args.out + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as fh:
-        json.dump(source, fh, indent=2, ensure_ascii=False)
-        fh.write("\n")
-    os.replace(tmp, args.out)
+        tmp = args.out + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(source, fh, indent=2, ensure_ascii=False)
+            fh.write("\n")
+        os.replace(tmp, args.out)
+
+        tmp = args.metadata + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(cache, fh, indent=2, ensure_ascii=False)
+            fh.write("\n")
+        os.replace(tmp, args.metadata)
 
     print("Wrote {} with {} version(s), latest: {}".format(
         args.out, len(source["apps"][0]["versions"]),

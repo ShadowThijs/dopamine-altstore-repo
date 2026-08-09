@@ -3,7 +3,7 @@
   "subtitle": "A rootless semi-untethered jailbreak for iOS 15.0 - 18.7.1",
   "description": "Dopamine is a rootless semi-untethered jailbreak for iOS 15.0 - 17.3.1 (arm64e), iOS 15.0 - 18.7.1 and 26.0 - 26.0.1 (A12/A13) and iOS 15.0 - 18.7.1 (arm64).\n\nOfficial website: https://ellekit.space/dopamine/\nSource code: https://github.com/opa334/Dopamine",
   "identifier": "com.opa334.dopamine-source",
-  "sourceURL": "https://ShadowThijs.github.io/dopamine-altstore-repo/apps.json",
+  "sourceURL": "https://shadowthijs.github.io/dopamine-altstore-repo/apps.json",
   "iconURL": "https://raw.githubusercontent.com/opa334/Dopamine/3.x/Application/Dopamine/Assets.xcassets/AppIcon.appiconset/Icon-60@3x.png",
   "headerURL": "https://github.com/opa334/Dopamine/assets/52459150/ed04dd3e-d879-456d-9aa3-d4ed44819c7e",
   "website": "https://ellekit.space/dopamine/",
@@ -69,6 +69,26 @@
           "minOSVersion": "15.0"
         },
         {
+          "version": "2.5b4",
+          "buildVersion": "334993304",
+          "date": "2026-06-05T14:58:45Z",
+          "versionDate": "2026-06-05T14:58:45Z",
+          "localizedDescription": "Fix support for iOS 17.1 - 17.3.1",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b4/Dopamine.ipa",
+          "size": 53783670,
+          "minOSVersion": "15.0"
+        },
+        {
+          "version": "2.5b3",
+          "buildVersion": "322084572",
+          "date": "2026-05-13T19:26:27Z",
+          "versionDate": "2026-05-13T19:26:27Z",
+          "localizedDescription": "Add support for iOS 16.7.16, 17.0 - 18.7.1 (arm64)",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b3/Dopamine.ipa",
+          "size": 53783818,
+          "minOSVersion": "15.0"
+        },
+        {
           "version": "2.4.9",
           "buildVersion": "313607144",
           "date": "2026-04-25T16:20:49Z",
@@ -76,6 +96,26 @@
           "localizedDescription": "Fix a logic bug in forkfix [2.4.8 regression]",
           "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.4.9/Dopamine.ipa",
           "size": 53702230,
+          "minOSVersion": "15.0"
+        },
+        {
+          "version": "2.5b2",
+          "buildVersion": "302718259",
+          "date": "2026-03-28T17:25:08Z",
+          "versionDate": "2026-03-28T17:25:08Z",
+          "localizedDescription": "Experimental fixes / improvements to DarkSword (contributed by @TheRealClarity)",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b2/Dopamine.ipa",
+          "size": 53717967,
+          "minOSVersion": "15.0"
+        },
+        {
+          "version": "2.5b1",
+          "buildVersion": "301656291",
+          "date": "2026-03-26T06:03:57Z",
+          "versionDate": "2026-03-26T06:03:57Z",
+          "localizedDescription": "Add DarkSword kernel exploit as an option",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/2.5b1/Dopamine.ipa",
+          "size": 53717758,
           "minOSVersion": "15.0"
         },
         {
@@ -302,6 +342,46 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-2.5b4",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 2.5b4 released",
+      "caption": "Fix support for iOS 17.1 - 17.3.1",
+      "date": "2026-06-05T14:58:45Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/2.5b4"
+    },
+    {
+      "identifier": "dopamine-2.5b3",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 2.5b3 released",
+      "caption": "Add support for iOS 16.7.16, 17.0 - 18.7.1 (arm64)",
+      "date": "2026-05-13T19:26:27Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/2.5b3"
+    },
+    {
+      "identifier": "dopamine-2.5b2",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 2.5b2 released",
+      "caption": "Experimental fixes / improvements to DarkSword (contributed by @TheRealClarity)",
+      "date": "2026-03-28T17:25:08Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/2.5b2"
+    },
+    {
+      "identifier": "dopamine-2.5b1",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 2.5b1 released",
+      "caption": "Add DarkSword kernel exploit as an option",
+      "date": "2026-03-26T06:03:57Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/2.5b1"
+    },
     {
       "identifier": "dopamine-3.0.4",
       "appID": "com.opa334.Dopamine",

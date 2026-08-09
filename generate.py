@@ -9,7 +9,7 @@ Works with Python 3.8+ (stdlib only, no pip dependencies).
 
 Usage:
     python3 generate.py --source-url https://example.com/apps.json
-    python3 generate.py --source-url ... --prereleases --no-news
+    python3 generate.py --source-url ... --stable-only --no-news
 
 Optional environment variable:
     GITHUB_TOKEN    a GitHub personal access token (raises the API rate
@@ -83,7 +83,7 @@ def version_description(release):
 
 
 def build_source(releases, args, existing):
-    include_prerelease = args.prereleases
+    include_prerelease = not args.stable_only
     selected = [
         r for r in releases
         if (include_prerelease or not r["prerelease"]) and release_ipa(r)
@@ -189,9 +189,9 @@ def main():
     parser.add_argument("--repo", default=DEFAULT_REPO)
     parser.add_argument("--icon-url", default=APP_ICON_URL)
     parser.add_argument(
-        "--prereleases",
+        "--stable-only",
         action="store_true",
-        help="Also include pre-release (beta) versions",
+        help="Exclude pre-release (beta) versions",
     )
     parser.add_argument(
         "--no-news",

@@ -40,7 +40,7 @@ to `master` — the workflow runs on push too.)
 ## Notes
 
 - IPAs are downloaded from GitHub's own release CDN — nothing is mirrored.
-- Beta versions are excluded by default; run `python3 generate.py --help` for options
-  (e.g. `--prereleases`).
+- Beta versions are included by default and appear in the version list (e.g. `2.5b4`).
+  Run `python3 generate.py --help` for options (e.g. `--stable-only` to exclude betas).
 - Dopamine is developed by [opa334](https://github.com/opa334), not by this repo's
   maintainer. This repo only mirrors release metadata.

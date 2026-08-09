@@ -1,0 +1,42 @@
+name: Update AltStore source
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate apps.json
+        run: |
+          python3 generate.py \
+            --source-url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/apps.json" \
+            --out apps.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps.json
+          if git diff --cached --quiet; then
+            echo "apps.json is up to date, nothing to commit"
+          else
+            git commit -m "chore: update apps.json ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+          fi

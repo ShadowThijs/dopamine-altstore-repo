@@ -26,7 +26,7 @@
       "version": "3.0.5",
       "versionDate": "2026-08-13T01:12:57Z",
       "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.5/Dopamine.ipa",
-      "size": 55407506,
+      "size": 55407413,
       "versions": [
         {
           "version": "3.0.5",
@@ -34,7 +34,7 @@
           "versionDate": "2026-08-13T01:12:57Z",
           "localizedDescription": "Actually** fix random panics on TXM devices when something tries to load a dynamic trustcache (#893)",
           "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.5/Dopamine.ipa",
-          "size": 55407506,
+          "size": 55407413,
           "minOSVersion": "15.0",
           "buildVersion": "1"
         },

@@ -23,11 +23,21 @@
       "tintColor": "#7C4DFF",
       "category": "utilities",
       "beta": false,
-      "version": "3.0.4",
-      "versionDate": "2026-08-09T13:08:08Z",
-      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.4/Dopamine.ipa",
-      "size": 55400119,
+      "version": "3.0.5",
+      "versionDate": "2026-08-13T01:12:57Z",
+      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.5/Dopamine.ipa",
+      "size": 55407506,
       "versions": [
+        {
+          "version": "3.0.5",
+          "date": "2026-08-13T01:12:57Z",
+          "versionDate": "2026-08-13T01:12:57Z",
+          "localizedDescription": "Actually** fix random panics on TXM devices when something tries to load a dynamic trustcache (#893)",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.5/Dopamine.ipa",
+          "size": 55407506,
+          "minOSVersion": "15.0",
+          "buildVersion": "1"
+        },
         {
           "version": "3.0.4",
           "date": "2026-08-09T13:08:08Z",
@@ -312,6 +322,16 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-3.0.5",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 3.0.5 released",
+      "caption": "Actually** fix random panics on TXM devices when something tries to load a dynamic trustcache (#893)",
+      "date": "2026-08-13T01:12:57Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/3.0.5"
+    },
     {
       "identifier": "dopamine-2.5b4",
       "appID": "com.opa334.Dopamine",

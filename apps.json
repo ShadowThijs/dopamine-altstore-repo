@@ -23,11 +23,21 @@
       "tintColor": "#7C4DFF",
       "category": "utilities",
       "beta": false,
-      "version": "3.0.5",
-      "versionDate": "2026-08-13T01:12:57Z",
-      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.5/Dopamine.ipa",
-      "size": 55407413,
+      "version": "3.0.6",
+      "versionDate": "2026-08-14T17:57:43Z",
+      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.6/Dopamine.ipa",
+      "size": 55407373,
       "versions": [
+        {
+          "version": "3.0.6",
+          "date": "2026-08-14T17:57:43Z",
+          "versionDate": "2026-08-14T17:57:43Z",
+          "localizedDescription": "Fix \"Finalizing Bootstrap\" sometimes failing with \"code signature invalid\" error when jailbreaking a device for the first time [3.0.5 regression]",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.6/Dopamine.ipa",
+          "size": 55407373,
+          "minOSVersion": "15.0",
+          "buildVersion": "1"
+        },
         {
           "version": "3.0.5",
           "date": "2026-08-13T01:12:57Z",
@@ -332,6 +342,16 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-3.0.6",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 3.0.6 released",
+      "caption": "Fix \"Finalizing Bootstrap\" sometimes failing with \"code signature invalid\" error when jailbreaking a device for the first time [3.0.5 regression]",
+      "date": "2026-08-14T17:57:43Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/3.0.6"
+    },
     {
       "identifier": "dopamine-3.0.3",
       "appID": "com.opa334.Dopamine",

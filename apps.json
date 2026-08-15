@@ -23,11 +23,21 @@
       "tintColor": "#7C4DFF",
       "category": "utilities",
       "beta": false,
-      "version": "3.0.6",
-      "versionDate": "2026-08-14T17:57:43Z",
-      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.6/Dopamine.ipa",
-      "size": 55407373,
+      "version": "3.0.7",
+      "versionDate": "2026-08-15T03:38:22Z",
+      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.7/Dopamine.ipa",
+      "size": 55409953,
       "versions": [
+        {
+          "version": "3.0.7",
+          "date": "2026-08-15T03:38:22Z",
+          "versionDate": "2026-08-15T03:38:22Z",
+          "localizedDescription": "Fix an OOB kernel write during the jbupdate process that could cause a panic and in some cases leave the file `/var/jb/basebin/gen/dyld.old` in a corrupted state where it cannot be deleted anymore...",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.7/Dopamine.ipa",
+          "size": 55409953,
+          "minOSVersion": "15.0",
+          "buildVersion": "1"
+        },
         {
           "version": "3.0.6",
           "date": "2026-08-14T17:57:43Z",
@@ -342,6 +352,16 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-3.0.7",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 3.0.7 released",
+      "caption": "Fix an OOB kernel write during the jbupdate process that could cause a panic and in some cases leave the file `/var/jb/basebin/gen/dyld.old` in a corrupted state where it cannot be deleted anymore...",
+      "date": "2026-08-15T03:38:22Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/3.0.7"
+    },
     {
       "identifier": "dopamine-3.0.6",
       "appID": "com.opa334.Dopamine",

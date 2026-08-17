@@ -24,6 +24,7 @@ import plistlib
 import shutil
 import sys
 import tempfile
+import time
 import urllib.request
 import zipfile
 
@@ -58,15 +59,23 @@ def api_get(url, token):
 
 
 def fetch_releases(owner, repo, token):
+    # An empty-but-successful response happens during GitHub API incidents;
+    # retry a few times before giving up.
     releases = []
-    for page in (1, 2):
-        url = "https://api.github.com/repos/{}/{}/releases?per_page=100&page={}".format(
-            owner, repo, page
-        )
-        batch = api_get(url, token)
-        if not batch:
+    for attempt in range(3):
+        for page in (1, 2):
+            url = "https://api.github.com/repos/{}/{}/releases?per_page=100&page={}".format(
+                owner, repo, page
+            )
+            batch = api_get(url, token)
+            if not batch:
+                break
+            releases.extend(batch)
+        if releases:
             break
-        releases.extend(batch)
+        if attempt < 2:
+            print("warning: GitHub API returned no releases, retrying...", file=sys.stderr)
+            time.sleep(10)
     return releases
 
 
@@ -158,6 +167,13 @@ def build_source(releases, args, existing, cache, tmpdir):
         seen.add(key)
         deduped.append(entry)
     ordered = deduped
+    if not ordered:
+        print(
+            "ERROR: no releases with an .ipa asset were found; "
+            "{} left unchanged".format(args.out),
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     latest = ordered[0]
     app = {

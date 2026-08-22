@@ -23,11 +23,21 @@
       "tintColor": "#7C4DFF",
       "category": "utilities",
       "beta": false,
-      "version": "3.0.7",
-      "versionDate": "2026-08-15T03:38:22Z",
-      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.7/Dopamine.ipa",
-      "size": 55409953,
+      "version": "3.0.8",
+      "versionDate": "2026-08-22T16:27:26Z",
+      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.8/Dopamine.ipa",
+      "size": 55409203,
       "versions": [
+        {
+          "version": "3.0.8",
+          "date": "2026-08-22T16:27:26Z",
+          "versionDate": "2026-08-22T16:27:26Z",
+          "localizedDescription": "Fix jailbreak apps not being removed from home screen when removing the jailbreak on iOS 18.4+",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.8/Dopamine.ipa",
+          "size": 55409203,
+          "minOSVersion": "15.0",
+          "buildVersion": "1"
+        },
         {
           "version": "3.0.7",
           "date": "2026-08-15T03:38:22Z",
@@ -352,6 +362,16 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-3.0.8",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 3.0.8 released",
+      "caption": "Fix jailbreak apps not being removed from home screen when removing the jailbreak on iOS 18.4+",
+      "date": "2026-08-22T16:27:26Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/3.0.8"
+    },
     {
       "identifier": "dopamine-3.0.7",
       "appID": "com.opa334.Dopamine",

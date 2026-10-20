@@ -23,11 +23,21 @@
       "tintColor": "#7C4DFF",
       "category": "utilities",
       "beta": false,
-      "version": "3.0.11",
-      "versionDate": "2026-10-12T22:56:06Z",
-      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.11/Dopamine.ipa",
-      "size": 55420987,
+      "version": "3.0.12",
+      "versionDate": "2026-10-20T05:34:02Z",
+      "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.12/Dopamine.ipa",
+      "size": 55420784,
       "versions": [
+        {
+          "version": "3.0.12",
+          "date": "2026-10-20T05:34:02Z",
+          "versionDate": "2026-10-20T05:34:02Z",
+          "localizedDescription": "Add workaround for stock issue that causes touch not to work on certain A10/A11 aftermarket screens after a userspace reboot (Contributed by @moezemara)",
+          "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.12/Dopamine.ipa",
+          "size": 55420784,
+          "minOSVersion": "15.0",
+          "buildVersion": "1"
+        },
         {
           "version": "3.0.11",
           "date": "2026-10-12T22:56:06Z",
@@ -392,6 +402,16 @@
     }
   ],
   "news": [
+    {
+      "identifier": "dopamine-3.0.12",
+      "appID": "com.opa334.Dopamine",
+      "title": "Dopamine 3.0.12 released",
+      "caption": "Add workaround for stock issue that causes touch not to work on certain A10/A11 aftermarket screens after a userspace reboot (Contributed by @moezemara)",
+      "date": "2026-10-20T05:34:02Z",
+      "tintColor": "#7C4DFF",
+      "notify": false,
+      "url": "https://github.com/opa334/Dopamine/releases/tag/3.0.12"
+    },
     {
       "identifier": "dopamine-3.0.11",
       "appID": "com.opa334.Dopamine",
